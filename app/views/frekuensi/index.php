@@ -132,7 +132,7 @@
                         <div id="world-map-markers">
                           <div class="col-md-12 mt-3 pb-3 mb-3">
                             <div class="overflow-auto">
-                              <table id="myTable" class="table" style="width:100%">
+                              <table id="example2" class="table" style="width:100%">
                                 <thead class="table-light">
                                   <tr>
                                     <th scope="col" style="width:5%;" class="text-center">No</th>

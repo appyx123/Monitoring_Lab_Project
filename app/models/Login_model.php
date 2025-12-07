@@ -31,13 +31,15 @@ class Login_model {
     }
 
     public function validateLogin($username, $password) {
+        $hashed_password = hash('sha256', $password);
+
         $this->db->query("SELECT id_user, password 
                         FROM 
-                            mst_user 
+                            " . $this->table . " 
                         WHERE 
                             username = :username and password = :password");
         $this->db->bind('username', $username);
-        $this->db->bind('password', $password);
+        $this->db->bind('password', $hashed_password);
 
         $result = $this->db->single();
 

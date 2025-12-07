@@ -58,7 +58,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-primary button-style" onclick="add('Mentoring')">Tambah</a>
+                            <a data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-primary button-style" onclick="add('Mentoring', <?= $data['detail']['id_frekuensi']; ?>)">Tambah</a>
                         </div>
                         <div class="card-body">
                             <div class="overflow-auto">
@@ -124,6 +124,7 @@
                                                 <th style="text-align: center;" rowspan="2">URAIAN TUGAS</th>
                                                 <th style="text-align: center;" colspan="2">KEHADIRAN</th>
                                                 <th style="text-align: center;" colspan="4">TTD</th>
+                                                <th style="text-align: center;" rowspan="2" class="d-print-none">AKSI</th>
                                             </tr>
                                             <tr class="text-center">
                                                 <td style="text-align: center;"><b>H</b></td>
@@ -134,7 +135,7 @@
                                                 <td style="text-align: center;"><b>PENGGANTI</b></td>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                            <tbody>
                                             <?php 
                                             $no = 0;
                                             if (!empty($data['mentoring'])): 
@@ -147,6 +148,7 @@
                                                         <td><?= $mentoring['uraian_tugas']; ?></td>
                                                         <td class="text-center"><?= $mentoring['hadir']; ?></td>
                                                         <td class="text-center"><?= $mentoring['alpa']; ?></td>
+                                                        
                                                         <td class="text-center">
                                                             <?php if ($mentoring['status_dosen'] === 'Hadir'): ?>
                                                                 <img src="<?= BASEURL; ?>/<?= $data['detail']['photo_path'] ?>" alt="Foto" style="max-width: 80px; max-height: 80px;">
@@ -154,6 +156,7 @@
                                                                 <span>-</span>
                                                             <?php endif; ?>
                                                         </td>
+                                                        
                                                         <td class="text-center">
                                                             <?php if ($mentoring['status_asisten1'] === 'Hadir'): ?>
                                                                 <img src="<?= BASEURL; ?>/<?= $data['detail']['photo_path_asisten1'] ?>" alt="Foto" style="max-width: 80px; max-height: 80px;">
@@ -161,6 +164,7 @@
                                                                 <span>-</span>
                                                             <?php endif; ?>
                                                         </td>
+                                                        
                                                         <td class="text-center">
                                                             <?php if ($mentoring['status_asisten2'] === 'Hadir'): ?>
                                                                 <img src="<?= BASEURL; ?>/<?= $data['detail']['photo_path_asisten2'] ?>" alt="Foto" style="max-width: 80px; max-height: 80px;">
@@ -168,11 +172,21 @@
                                                                 <span>-</span>
                                                             <?php endif; ?>
                                                         </td>
+                                                        
                                                         <td class="text-center"><?= $mentoring['nama_asisten_pengganti']; ?></td>
+                                                        <td class="text-center d-print-none">
+                                                            <a href="javascript:void(0);" 
+                                                                class="badge badge-success modalUbah"
+                                                                data-bs-toggle="modal" 
+                                                                data-bs-target="#myModal"
+                                                                data-id="<?= $mentoring['id_mentoring']; ?>"
+                                                                onclick="change('Mentoring', <?= $mentoring['id_mentoring']; ?>)"> Edit
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; 
                                             endif;  
-                                            for ($i = $no + 1; $i <= 10; $i++): ?>
+                                            for ($i = $no + 1; $i <= 12; $i++): ?>
                                                 <tr class="table-row">
                                                     <td class="text-center"><?= $i; ?></td>
                                                     <td class="text-center"></td>
@@ -184,6 +198,7 @@
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
+                                                    <td class="text-center d-print-none"></td> 
                                                 </tr>
                                             <?php endfor; ?>
                                         </tbody>

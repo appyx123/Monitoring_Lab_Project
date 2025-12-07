@@ -8,14 +8,14 @@ class App {
 
     public function __construct() {
 
-        $url = $this->parseURL();        
+        $url = $this->parseURL();
         
         if(empty($url[0])){
-            if(file_exists('home.php')) {
+            if(file_exists('app/controllers/home.php')) {
                 $this->controller = $url[0];
                 unset($url[0]);
             }
-
+            
             require_once 'app/controllers/' . $this->controller . '.php';
             $this->controller = new $this->controller; 
         }else{
@@ -23,7 +23,7 @@ class App {
                 $this->controller = $url[0];
                 unset($url[0]);
             }
-
+            
             require_once 'app/controllers/' . $this->controller . '.php';
             $this->controller = new $this->controller; 
 
@@ -49,6 +49,12 @@ class App {
             $url = rtrim($_GET['url'], '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode('/', $url);
+            
+            // upper case fix Case Sensitivity in Linux
+            if (isset($url[0]) && is_string($url[0])) {
+                $url[0] = ucfirst($url[0]);
+            }
+
 
             return $url;
         }

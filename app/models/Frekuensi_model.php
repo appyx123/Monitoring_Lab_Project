@@ -196,6 +196,7 @@ class Frekuensi_model{
     }      
     public function getMentoringByFrekuensiId($id_frekuensi) {
         $this->db->query("SELECT
+                            trs_mentoring.id_mentoring,
                             trs_mentoring.tanggal,
                             trs_mentoring.uraian_materi,
                             trs_mentoring.uraian_tugas,

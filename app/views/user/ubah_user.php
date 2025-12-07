@@ -15,7 +15,7 @@
                 <div class="form-group mb-1">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">
-                        <input id="passwordInput" type="password" name="password" class="form-control " value="<?= $data['ubahdata']['password']?>">
+                        <input id="passwordInput" type="password" name="password" class="form-control " value="">
                         <div class="input-group-append">
                             <button id="togglePassword" type="button" class="btn btn-outline-secondary"><i class="fa fa-eye"></i></button>
                         </div>

@@ -11,14 +11,13 @@ class Mentoring extends Controller {
         $this->view('mentoring/index', $data);
         $this->view('templates/footer');
     }
-    public function modalTambah(){
+    public function modalTambah($id_frekuensi){
         $data['dosenOptions'] = $this->model('Mentoring_model')->tampilDosen();
         $data['asistenOptions'] = $this->model('Mentoring_model')->tampilAsisten();
         $data['matakuliahOptions'] = $this->model('Mentoring_model')->tampilMatakuliah();
         $data['kelasOptions'] = $this->model('Mentoring_model')->tampilKelas();
         $data['ruanganOptions'] = $this->model('Mentoring_model')->tampilRuangan();
-        $data['frekuensiOptions'] = $this->model('Mentoring_model')->tampilFrekuensi();
-
+        $data['frekuensiOptions'] = $this->model('Frekuensi_model')->detailFrekuensi($id_frekuensi);
 
         $this->view('frekuensi/tambah_mentoring', $data);
     }
@@ -117,12 +116,19 @@ class Mentoring extends Controller {
         $this->view('frekuensi/ubah_mentoring', $data);
     }
     public function prosesUbah(){
+        // Cek apakah ada baris yang berubah
         if($this->model('Mentoring_model')->prosesUbah($_POST) > 0){
-            Flasher::setFlash(' berhasil diubah', '', 'success');
-        }else{
-            Flasher::setFlash(' tidak berhasil diubah', '', 'danger');
+            Flasher::setFlash('berhasil diubah', '', 'success');
+        } else {
+            // Jika data sama persis (tidak ada yang diedit), tetap dianggap sukses
+            Flasher::setFlash('berhasil diubah', '', 'success');
         }
-        header('Location: '.BASEURL. '/mentoring');
+        
+        // AMBIL ID FREKUENSI DARI FORM UNTUK REDIRECT
+        $id_frekuensi = $_POST['id_frekuensi'];
+        
+        // KEMBALIKAN KE HALAMAN DETAIL, BUKAN KE HALAMAN INDEX MENTORING
+        header('Location: '.BASEURL. '/frekuensi/detail/' . $id_frekuensi);
         exit;
     }
     public function hapus($id){

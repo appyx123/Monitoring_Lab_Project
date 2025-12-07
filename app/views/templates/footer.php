@@ -84,6 +84,11 @@
 <script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.print.min.js"></script>
  
 <script>
+
+    $(document).ready(function() {
+      $('#example2').DataTable();
+    });
+    
     new DataTable('#example', {
     dom: 'Bfrtip', // Aktifkan tombol
     buttons: [
@@ -140,10 +145,15 @@
     // });
 
     let table = new DataTable('#myTable')
-    function add(jenis) {
-        console.log("Function add called with type:", jenis);
+    function add(jenis, id = null) {
+        console.log("Function add called with type:", jenis, "and id:", id);
         $('.modal-title').html('Tambah Data');
+        
         let url = '<?= BASEURL ?>/' + jenis + '/modalTambah';
+        if (id) {
+            url += '/' + id;  // Tambahkan id jika tersedia
+        }
+
         $.get(url, function(data, success) {
             console.log("Data loaded successfully");
             $('.modal-body').html(data);
@@ -160,6 +170,7 @@
             console.log("Error loading data");
         });
     }
+
     // Change
     function change(jenis, id) {
         $('.modal-title').html('Ubah Data');

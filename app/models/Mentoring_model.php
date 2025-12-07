@@ -12,7 +12,9 @@ class Mentoring_model{
                             (:id_frekuensi, :tanggal, :uraian_materi, :uraian_tugas, :hadir, :alpa, :status_dosen, :status_asisten1, :status_asisten2, :id_asisten_pengganti)");
         
         $this->db->bind('id_frekuensi', $data['id_frekuensi']);
+
         $this->db->bind('tanggal', $data['tanggal']);
+
         $this->db->bind('uraian_materi', $data['uraian_materi']);
         $this->db->bind('uraian_tugas', $data['uraian_tugas']);
         $this->db->bind('hadir', $data['hadir']);

@@ -4,10 +4,7 @@
             <div class="form-group mb-1">
                 <label for="id_frekuensi" class="form-label">Frekuensi</label>
                 <select name="id_frekuensi" class="form-control">
-                    <option value="">Pilih Frekuensi</option>
-                    <?php foreach ($data['frekuensiOptions'] as $frekuensi) : ?>
-                        <option value="<?= $frekuensi['id_frekuensi']; ?>"><?= $frekuensi['frekuensi']; ?></option>
-                    <?php endforeach; ?>
+                    <option value="<?= $data['frekuensiOptions']['id_frekuensi']; ?>" selected><?= $data['frekuensiOptions']['frekuensi']; ?></option>
                 </select>
             </div>
             <div class="form-group mb-1">
